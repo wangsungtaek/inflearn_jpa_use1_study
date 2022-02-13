@@ -3,14 +3,13 @@ package com.jpabook.jpashop.service;
 import com.jpabook.jpashop.Repository.ItemRepository;
 import com.jpabook.jpashop.Repository.MemberRepository;
 import com.jpabook.jpashop.Repository.OrderRepository;
-import com.jpabook.jpashop.domain.Delivery;
-import com.jpabook.jpashop.domain.Member;
-import com.jpabook.jpashop.domain.Order;
-import com.jpabook.jpashop.domain.OrderItem;
+import com.jpabook.jpashop.domain.*;
 import com.jpabook.jpashop.domain.item.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -59,6 +58,13 @@ public class OrderService {
         // 주문 취소
         order.cancel();
 
+    }
+
+    /**
+     * 검색
+     */
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByCriteria(orderSearch);
     }
 
 
